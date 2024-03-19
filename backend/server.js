@@ -1,12 +1,23 @@
 import express from 'express'
 import httpStatus from 'http-status'
-
+import cors from 'cors'
+import { dbConnect } from './config/dbConnect.js'
+import morgan from 'morgan'
+import dotenv from 'dotenv'
+dotenv.config({})
 const app = express()
-
+ 
+app.use(cors())
+app.use(express.json())
+app.use(morgan())
 app.get('/', (req, res) => {
   res.status(httpStatus.OK).send('Welcome to my blog website')
 })
 
-app.listen(3000, () => {
-  console.log('App is listening on port 3000!')
+const {PORT, NODE_ENV} = process.env
+const port = NODE_ENV === 'development' ? 3000 : PORT
+app.listen(port, () => {
+  console.log(`App is listening on port ${port}!`)
 })
+        dbConnect().then(() => console.log('Connected to the database…')) 
+        .catch((err) => console.error('Connection error:', err));
