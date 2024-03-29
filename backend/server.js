@@ -5,6 +5,7 @@ import { dbConnect } from './config/dbConnect.js'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
 import { postRouter } from './routes/postRoutes.js'
+import { bookRouter } from './routes/bookRoutes.js'
 dotenv.config({})
 const app = express()
  
@@ -12,12 +13,13 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan())
 app.use("/blogs", postRouter)
+app.use("/books", bookRouter)
 app.get('/', (req, res) => {
   res.status(httpStatus.OK).send('Welcome to my blog website')
 })
 
 const {PORT, NODE_ENV} = process.env
-const port = NODE_ENV === 'development' ? 3000 : PORT
+const port = NODE_ENV === 'development' ? 3010 : PORT
 app.listen(port, () => {
   console.log(`App is listening on port ${port}!`)
 })
