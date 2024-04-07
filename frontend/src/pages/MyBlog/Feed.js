@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar';
 import Feedback from '../../components/Feedback';
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router';
-const base_url = "http://localhost:3010/";
+const base_url = "https://blog-website-c6eb.onrender.com";
 
 const Feed = () => {
     const [blog, setBlog] = useState([]);
@@ -15,7 +15,7 @@ const Feed = () => {
 
     const getPosts = async () => {
         try {
-            const response = await axios.get(`${base_url}blogs`);
+            const response = await axios.get("https://blog-website-c6eb.onrender.com/blogs");
             console.log(response.data);
             setBlog(response.data);
         } catch (error) {
